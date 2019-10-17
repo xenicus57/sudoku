@@ -1,0 +1,12 @@
+Como cambiar la codificacion de unfichero windws a linux
+Me he encontrado este problema la tratar de acceder con las funcion  <read > de pyton a ficheros creqdos en windwos
+ 
+"""
+COMO resolver
+---------------
+De windows a linux(utf-8) desde la terminal linux
+Convert text from the ISO 8859-15 character encoding to UTF-8:
+
+$ iconv -f ISO-8859-15 -t UTF-8 < input.txt > output.txt
+
+"""
