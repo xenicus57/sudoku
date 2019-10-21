@@ -13,7 +13,7 @@ import sys
 def alert(pipo=""):
 #*************************
     """
-    Funcion parada, información y continuacion.
+    Funcion parada, información y continuacion. Funcion de control del desarrollador para provocar paradas y recabar información
     
     - Argumentos 
     pipo (opcional) -> char 
@@ -27,7 +27,7 @@ def presenta(aVar):
 #************************
     """
         Función que nos permite ver la situación del sudoku insertando la función < presenta() > en cualquier lugar del modulo de resolución,
-        por tanto su función principal es de apoyo en el chequeo del código que vamos costruyendo.
+        por tanto su función principal es de apoyo al desarrollador en el chequeo del código que vamos costruyendo.
 
         Argumentos:
             aVar -> Lista multidimensional
@@ -98,7 +98,7 @@ def ini_congruen(cSum):
     Congruencia indica: que para cualquier fila,columna o cuadro, no hay ningun elemento repetido.
 
     Argumentos:
-        cSum -> cadena de caracteres de cualquier fila, columna, cuadro.
+        cSum -> cadena de caracteres de cualquier fila, columna o cuadro.
 
     Devuelve:
     True -> Si a encontrado un elemento repetido
@@ -158,7 +158,7 @@ def ini_comp(aVar,aFil,aCol,aInt):
 def ele_Int(i,j):
 #************************
     """
-    Esta funcion nos calculara, conociendo posicion de fila y columna de que cuadro se trata
+    Esta funcion nos calculara, conociendo posicion de fila y columna que cuadro tiene asociado
     ej: para [5,3] -> cuadro 4
 
     Argumentos:
@@ -207,7 +207,7 @@ def est_Smp(cFil,cCol,cInt):
 def ele_comp(cele,i,j,nInt,aFil,aCol,aInt):
 #************************
     """
-    Encontrado un elemento de una casilla nos permite reajustar las listas: fila columna y cuadro con dicho elemento añadiendolo
+    Encontrado un elemento de una casilla nos permite reajustar las listas: fila, columna y cuadro con dicho elemento añadiendolo
 
     Argumentos:
     cele -> elemento encontrado
@@ -240,7 +240,7 @@ def Bucle1(aVar,aFil,aCol,aInt,nvuelta):
     nvuelta -> integer
 
     Devuelve:
-    Siempre  True, a no ser que interrumpa el programa al encontrar que es irresoluble
+    Siempre  True, a no ser que interrumpa el programa al encontrar que es irresoluble o una incogruencia (de su paso por Fuerza Bruta) 
     """
     nInt = 0
     lsigue =True
@@ -298,13 +298,13 @@ def Bucle1(aVar,aFil,aCol,aInt,nvuelta):
                         presenta(aVar)
                         sys.exit(0)
 
-                    # tengo dudas que entre por aquí poner checks
                     if len(aVar[i][j]) == 0:
-                        # alert("Creo que nuncaca saldrá este msg.")
-                        # presenta (aVar)
+                        # Hallamos una INCONGRUENCIA 
+                        # La incongruencia hallada nos llevará a Fuerza Bruta probando con el siguiente candidato o si fuera el ultimo
+                        # a quitar el ultimo elemento de aBruta (deshacemos la pila) y probar con los anteriores
                         return False
 
-                    # Hemos encontrado solo 1 es portanto la solucion de esa casilla
+                    # Hemos encontrado solo 1 es por tanto la solucion de esa casilla
                     if len(aVar[i][j]) == 1:
                         #print("1º Estrategia" )
                         #print("Fil.",i,"Col.",j,"  Valor",aVar[i][j])
@@ -363,6 +363,7 @@ def est_Cmp(aVar,aTmp,aFil,aCol,aInt):
     for i in cSDK:
 
         if cSum.count(i) == 1: # he encontrado uno, es el valido
+
             # a que elemento de la lista corresponde
             for j in aTmp:
                 if i in j[2]:
@@ -469,7 +470,7 @@ def congruen(cSum):
     Si secumple devolvera True, en caso contrario False
 
     Argumentos:
-    aVar -> matriz de nSDK x nSDK
+    cSum -> cadena de caracteres
 
     Devuelve:
     Un booleano
@@ -568,16 +569,6 @@ def congru_cua(aVar):
 
     return True    
 
-"""
-
-
-
-
-"""
-
-
-
-
 
 #************************
 def loadpar(apar,clin):
@@ -587,7 +578,7 @@ def loadpar(apar,clin):
     
     Argumentos:
     apar -> Diccionario de parametros de configuracion de sudoku a resolver
-    clin -> Cadena de caracteres (linea de del fichero de configuracion)
+    clin -> Cadena de caracteres (linea del fichero de configuracion)
     
     Devuelve:
     Actualiza el diccionario, devuelve None
@@ -660,11 +651,11 @@ aCol -> Lista de las columnas, contiene para cada columna una cadena con las cas
 aInt -> Lista de cuadros, contiene para cada cuadro una cadena con las casillas halladas en el cuadro (solucion unica)
 
 aPend ->Lista de ?x3 de las casillas no conseguidas (?) todas en formato -> int
-        [Fila, Columna, Número de valores posibles]
+        [Fila, Columna, Número de candidatos posibles]
         Ejemplo: si aPend[6]->[5,6,4]
         aPend[6,1] -> 5ª fila
         aPend[6,2]-> 6ª columna
-        aPend[6,3]-> tiene 4 valores posibles
+        aPend[6,3]-> tiene 4 posibles candidatos
 
 aBruta ->   array de ?x3 con el siguiente contenido {aVar,aPend,contador} como vemos
             contiene 2 arrays ya comentados y un contador.
@@ -684,7 +675,6 @@ apar = {"CADSDK":""  ,
         "SOLCAS3":False ,
         "VERALTARB":False, }
 
-
 try:
     f_ini = open("sdk.ini", mode="r", encoding="utf-8")
 
@@ -699,25 +689,13 @@ for i in f_ini:
 f_ini.close()
 
 
-
+"""
 
 
 """
 
 
-
-
-
-
-"""
-
-
-
-
-
-
-
-# Variables indicativas del Sudoku (en siguientes versiones se pasaran atraves de un archivo de configuaracion <sdk.ini>)
+# Variables indicativas del Sudoku 
 cSDK = apar["CADSDK"]
 nSDK = len(cSDK)
 nRSDK = int(nSDK**(1/2)) # raiz cuadrada
@@ -745,7 +723,7 @@ f_in.close()
 
 # Carga del sudoku a resolver leyendo nSDK*nSDK caracteres VALIDOS (definidos en la variable: cSDK)
 """
-Es interesante saber como podemos pasarle el sudoku a resolver, ejemplos:
+Es interesante saber como podemos pasarle el sudoku a resolver a programa, ejemplos:
 
 1º Aspecto visual conocido:
  | | | |2| | |1| |
@@ -775,7 +753,7 @@ Es interesante saber como podemos pasarle el sudoku a resolver, ejemplos:
  4      7
   7   3   
 
-La carga solo entiende la cadena numerica: 123456789 y el caracter " " como casilla a resolver,
+La carga solo entiende la cadena numerica: cSDK (123456789 caso 9x9) y el caracter " " como casilla a resolver,
 por tanto tratara de leer tantos caracteres validos como casillas tenga el sudoku. 81 en el caso de un sudoku de 9x9,
 asi que podemos pasar el sudoku a resolver como mas nos apetezca conocida como es la lectura. 
 """
@@ -876,7 +854,7 @@ while True:
     # el objetivo es agrupar las casillas resueltas por fila columa y cuadrado.
     ini_comp(aVar,aFil,aCol,aInt)
 
-    # Control
+    # Check
     # print("Estado del sudoku al inicio de su resolucion y su evolucion. Vemos casillas resueltas y candidatos de las no resueltas.")
     # presenta(aVar)
     
@@ -912,7 +890,7 @@ while True:
     if lsal:
 
         if Bucle2(aVar,aFil,aCol,aInt):
-            check += 1
+            #check += 1
             #print(check)
             #alert()
             continue
@@ -961,33 +939,36 @@ while True:
     *************************************************     
     ****** LLegar a solucion por FUERZA BRUTA *******   
     *************************************************
-    El metodo se basa en recorrer un arbol desde la base a las ramas.
-    para ello se ordenan las casillas sin resolver desde la de menor
-    numero de valores posibles hasta la mayor, empezando el recorrido por aquellas que menos se ramifican.
-    Os recuerdo que contiene aBruta un conjunto con esta estructura repetida [aVar,aPed, <un contador> ]
+    Crearemos una pila con aBruta que contendrá: 
+    - Situación de aVar (tendremos casillas con solucion y casillas con candidatos)
+    - La tabla asociada aPend, que contiene solo las casillas con candidatos [fila,columna,nº de candidatos] se cargará en aBruta ordenandolo
+      previamente por el tercer elemento (nº de candidatos) de menor a mayor
+    - Un contador de aBruta
+
+     Empezaremos con el primer elemento de aPend, el de menor numero de candidatos, tomaremos el primer candidato como si fuese la solución y le haremos 
+     que circule por la 1º y 2º estrategia tratando de encontrar la solución, si no lo conseguimos y nos vemos forzados a entrar en fuerza bruta
+     volveremos a  cargar aBruta como lo hicimos anteriormente un nuevo elemento en la pila, con la situacion de aVar, aPend y el contador de aBruta,   
+
     """
     # alert("Entramos en Fuerza Bruta")
 
     
     # Ojo en primera vuelta siempre entrará por el (else) de este (if)
     if not lsal:
+
         # Bucle de pasos atras
         while True:
-            # carga del estado anterior
             
+            # carga del estado anterior
             aVar = aBruta[-1][0].copy()
             aPend = aBruta[-1][1].copy()
-            #print(aPend)
-            #alert("Devolucionn aBruta")
-            
+             
             #check
             """
             for i in aBruta:
                 presenta(i[0])
             alert("*******************")
             """
-
-
 
             """
             ¿Es el ultimo elemento tratado de los pendientes?
@@ -1013,36 +994,33 @@ while True:
             else:
                 break
 
-        # recoger el siguiente elemento de los posibles aumentando el contador
+        # recoger el siguiente elemento de los posibles aumentando posteriormente el contador
         
         nTmp = aBruta[-1][2] 
 
 
         # asignamos ese posible valor a la casilla
-        # No le gusta asi:       aVar[aPend[0][0]][aPend[0][1]] = aVar[aPend[0][0]][aPend[0][1]][nTmp]
+        # Cambiamos esta sintaxis:   aVar[aPend[0][0]][aPend[0][1]] = aVar[aPend[0][0]][aPend[0][1]][nTmp] por la siguiente 
         nFil = aPend[0][0]
         nCol = aPend[0][1]
         
-        """
-        print("Fila",nFil)
-        print("Col.",nCol)
-        presenta(aBruta[-1][0])
-        """
         aVar[nFil][nCol] = aVar[nFil][nCol][nTmp]
 
-        # cargar contador
+        # aumentamos el contador
         aBruta[-1][2] = nTmp +1
 
 
 
-    # han quedado elementos por resolver
+    # han quedado elementos por resolver, otro elemento a la pila de aBruta
     else:
         # reordenamos aPend por el menor numero de cadidatos casilla 3º
         aPend.sort(key=lambda tup:tup[2])
         
         # añadir elementos a aBruta
         
-        # He tenido que crear un punto intermedio para cargar <aVar> se carga por referencia y no se porqué
+        # He tenido que crear un punto intermedio para cargar <aVar> se esta cargando por referencia y no se porqué
+        # Vaya tela hasta que que me he dado cuenta -> un recorrido por la pila aBruta presentado los primeros elementos (estados de aVar)
+        # sorpresa todos son iguales ¿alguien que sepa porqué?
         vyt = []
         for i in range(0,nSDK):
             lvyt = []
@@ -1055,27 +1033,21 @@ while True:
                 
 
         """
+        # Check -> Pila de aVar cargados 
         for i in aBruta:
                 presenta(i[0])
         alert("*******************")
         """
-        """        
+        """  
+        # Check -> Pila de aPend cargados      
         for i in aBruta:
                 print(i[1])
                 print()
         alert("*******************")
         """
 
-
-
-
-        #print(aBruta[-1][1])
-        #presenta(aBruta[-1][0]) 
-
-
-
         # Coger el primer candidato y probar fila=aPend[1,1], columna=aPend[1,2]
-        # No le gusta asi : aVar[aPend[0][0]][aPend[0][1]] = aVar[aPend[0][0]][aPend[0][1]][0]
+        # Cambiamos esta sintaxis:  aVar[aPend[0][0]][aPend[0][1]] = aVar[aPend[0][0]][aPend[0][1]][0] por la siguiente
         nFil = aPend[0][0]
         nCol = aPend[0][1]
         aVar[nFil][nCol] = aVar[nFil][nCol][0]
