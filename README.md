@@ -1,4 +1,4 @@
-TITULO:Resolucion de sudokus cuadrados de cualquier dimension
+# TITULO:Resolucion de sudokus cuadrados de cualquier dimension
 
 Se pretende resolver cualquier sudoku cuadrado, de cualquier dimension.
 
@@ -77,6 +77,8 @@ SEGUNDO (validación)
 
 Con el sudoku cargado estudiaremos que es incongruente, que no se han cargado algun elemento repetido tanto por fila / columna / cuadro.
 A continuacion procederemos a resolverlo
+
+
 
 
 

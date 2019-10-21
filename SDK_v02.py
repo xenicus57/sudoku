@@ -1,7 +1,11 @@
 """
 SDK_v02.py
 Version 02
-En esta version se implementara la configuracion a través de fichero <sdk.ini>
+En esta version se implementara parte de la configuracion a través de fichero <sdk.ini> y la resolucion por Fuerza Bruta.
+
+******************
+*** FINALIZADO ***
+******************
 """
 import sys
 
@@ -248,7 +252,7 @@ def Bucle1(aVar,aFil,aCol,aInt,nvuelta):
             for j in range(0,nSDK):
                 """
                 En primera vuelta habrá casillas (las que hay que resolver) de aVar que estaran vacias y en las siguientes vueltas
-                con un solo caracter (SOLUCION DE CASILLA) o mas caracteres (PENDIENTE), estos caracteres de mas nos indican
+                con un solo caracter (SOLUCION DE CASILLA) o mas caracteres (CANDIDATOS/PENDIENTE), estos caracteres de mas nos indican
                 que son candidatos para ser la solucion de dicha casilla
                 Cada vez que consiga solucionar una casilla. Se reinicia el bucle FOR
                 """
@@ -296,14 +300,15 @@ def Bucle1(aVar,aFil,aCol,aInt,nvuelta):
 
                     # tengo dudas que entre por aquí poner checks
                     if len(aVar[i][j]) == 0:
-                        alert("Creo que nuncaca saldrá este msg.")
+                        # alert("Creo que nuncaca saldrá este msg.")
+                        # presenta (aVar)
                         return False
 
                     # Hemos encontrado solo 1 es portanto la solucion de esa casilla
                     if len(aVar[i][j]) == 1:
-                        print("1º Estrategia" )
-                        print("Fil.",i,"Col.",j,"  Valor",aVar[i][j])
-                        alert()
+                        #print("1º Estrategia" )
+                        #print("Fil.",i,"Col.",j,"  Valor",aVar[i][j])
+                        #alert()
                         # Hallada solución de casilla repercutir en las listas que mantienen los
                         # encontrados por fila, columna, cuadrado, añadiendo el hallado
                         ele_comp(aVar[i][j],i,j,nInt,aFil,aCol,aInt)
@@ -362,9 +367,9 @@ def est_Cmp(aVar,aTmp,aFil,aCol,aInt):
             for j in aTmp:
                 if i in j[2]:
                     # check
-                    print("2º Estrategia" )
-                    print("Fil.",j[0],"Col.",j[1],"  Valor",i)
-                    alert()
+                    # print("2º Estrategia" )
+                    # print("Fil.",j[0],"Col.",j[1],"  Valor",i)
+                    # alert()
                     
                     aVar[j[0]][j[1]] = i
                     return True
@@ -456,6 +461,184 @@ def situacion(aVar):
 
     return aTmp
 
+#************************
+def congruen(cSum):
+#************************
+    """
+    Esta funcion verifica que dada una cadena de numeros (repetidos o no) al menos alguno esta en otra cadena. 
+    Si secumple devolvera True, en caso contrario False
+
+    Argumentos:
+    aVar -> matriz de nSDK x nSDK
+
+    Devuelve:
+    Un booleano
+
+    """
+    for i in cSDK:
+        if not i in cSum:
+            return False
+    
+    return True
+
+#************************
+def congru_fil(aVar):
+#************************
+    """
+    Esta funcion recoge por fila todos los valores posibles de aVar: conseguidos y candidatos y apoyandose en la funcion congruen() verifica
+    que dada una cadena de numeros (repetidos o no) al menos alguno esta en otra cadena. 
+    Si se cumple devolvera True, en caso contrario False
+    
+    Argumentos:
+    aVar -> matriz de nSDK x nSDK
+
+    Devuelve:
+    Un booleano
+
+    """
+    
+    for i in range(0,nSDK):
+
+        cTmp = ""
+        for j in range(0,nSDK):
+            cTmp += aVar[i][j]
+        if not congruen(cTmp):
+            return False
+
+    return True
+
+#************************
+def congru_col(aVar):
+#************************
+    """
+    Esta funcion recoge por columna todos los valores posibles de aVar: conseguidos y candidatos y apoyandose en la funcion congruen() verifica
+    que dada una cadena de numeros (repetidos o no) al menos alguno esta en otra cadena. 
+    Si se cumple devolvera True, en caso contrario False
+    
+    Argumentos:
+    aVar -> matriz de nSDK x nSDK
+
+    Devuelve:
+    Un booleano
+
+    """
+    
+    for i in range(0,nSDK):
+
+        cTmp = ""
+        for j in range(0,nSDK):
+            cTmp += aVar[j][i]
+        if not congruen(cTmp):
+            return False
+
+    return True
+
+#************************
+def congru_cua(aVar):
+#************************
+    """
+    Esta funcion recoge por cuadro todos los valores posibles de aVar: conseguidos y candidatos y apoyandose en la funcion congruen() verifica
+    que dada una cadena de numeros (repetidos o no) al menos alguno esta en otra cadena. 
+    Si se cumple devolvera True, en caso contrario False
+    
+    Argumentos:
+    aVar -> matriz de nSDK x nSDK
+
+    Devuelve:
+    Un booleano
+
+    """
+    nFil = 0
+    nCol = 0
+
+    for i in range(0,nSDK):
+        cTmp = ""
+        nFil = (int(i/nRSDK)*nRSDK) - 1
+
+        for j in range(0,nRSDK):
+            nFil += 1
+            nCol = ((i%nRSDK)*nRSDK) -1
+
+            for k in range(0,nRSDK):
+                nCol +=1
+                cTmp += aVar[nFil][nCol]
+        
+        if not congruen(cTmp):
+            return False
+
+    return True    
+
+"""
+
+
+
+
+"""
+
+
+
+
+
+#************************
+def loadpar(apar,clin):
+#************************
+    """
+    Funcion que cargara en un dicionario (apar) los diferentes parametros de configuracion:
+    
+    Argumentos:
+    apar -> Diccionario de parametros de configuracion de sudoku a resolver
+    clin -> Cadena de caracteres (linea de del fichero de configuracion)
+    
+    Devuelve:
+    Actualiza el diccionario, devuelve None
+
+    """
+    
+    clin = clin.strip()
+    
+    if "CADSDK" in clin:
+        pos = clin.find("=")
+        apar["CADSDK"] = clin[pos+1:]
+
+    elif "FILEIN" in clin:
+        pos = clin.find("=")
+        apar["FILEIN"] = clin[pos+1:]
+
+    elif "FILEOUT" in clin:
+        pos = clin.find("=")
+        apar["FILEOUT"] = clin[pos+1:]
+
+    elif "NUMSOL" in clin:
+        pos = clin.find("=")
+        apar["NUMSOL"] = int(clin[pos+1:])
+
+    elif "PRESSOL" in clin:
+        pos = clin.find("=")
+        tmp = True if clin[pos+1:] == "S" else False
+        apar["PRESSOL"] = tmp
+
+    elif "SOLCAS1" in clin:
+        pos = clin.find("=")
+        tmp = True if clin[pos+1:] == "S" else False
+        apar["SOLCAS1"] = tmp
+      
+    elif "SOLCAS2" in clin:
+        pos = clin.find("=")
+        tmp = True if clin[pos+1:] == "S" else False
+        apar["SOLCAS2"] = tmp        
+
+    elif "SOLCAS3" in clin:
+        pos = clin.find("=")
+        tmp = True if clin[pos+1:] == "S" else False
+        apar["SOLCAS3"] = tmp
+
+    elif "VERALTARB" in clin:
+        pos = clin.find("=")
+        tmp = True if clin[pos+1:] == "S" else False
+        apar["VERALTARB"] = tmp
+
+    return None
+
 #*************************
 #*************************
 # MODULO DE RESOLUCION
@@ -472,11 +655,11 @@ aVar ->  Lista de 9x9 los valores de las casillas, todas en formato de Char
 
 aFil -> Lista de filas, contiene para cada fila una cadena con las casillas halladas en la fila (solucion unica)
 
-aCol -> Lista de las columnas, contiene cada columna una cadena con las casillas halladas en la columna (solucion unica)
+aCol -> Lista de las columnas, contiene para cada columna una cadena con las casillas halladas en la columna (solucion unica)
 
-aInt -> Lista de cuadros, cada cuadro una cadena con las casillas halladas en el cuadro (solucion unica)
+aInt -> Lista de cuadros, contiene para cada cuadro una cadena con las casillas halladas en el cuadro (solucion unica)
 
-aPend ->Lista de ?x3 de las casillas no conseguidas (?) todas en formato Num
+aPend ->Lista de ?x3 de las casillas no conseguidas (?) todas en formato -> int
         [Fila, Columna, Número de valores posibles]
         Ejemplo: si aPend[6]->[5,6,4]
         aPend[6,1] -> 5ª fila
@@ -490,7 +673,16 @@ aBruta ->   array de ?x3 con el siguiente contenido {aVar,aPend,contador} como v
 #******************************************************************************
 # Apertura del fichero de parametros de configuracion y carga para tratamiento
 
-apar = [None] * nSDK
+# Diccionario que contendrá los parametros de configuracion
+apar = {"CADSDK":""  ,    
+        "FILEIN":"sdk"  ,    
+        "FILEOUT":"Sal_sdk.txt" ,    
+        "NUMSOL":"1"  ,
+        "PRESSOL":False ,
+        "SOLCAS1":False ,   
+        "SOLCAS2":False ,    
+        "SOLCAS3":False ,
+        "VERALTARB":False, }
 
 
 try:
@@ -501,57 +693,16 @@ except:
     sys.exit(0)
 
 for i in f_ini:
-    if i[0] != "#"
+    if i[0] != "#" :
         loadpar(apar,i)
 
+f_ini.close()
 
 
 
 
 
 """
-
- // apertura del fichero de parametros de configuracion y carga para tratamiento
- //*****************************************************************************
- nManiConf := FOPEN("sdk.ini",FO_READ) 
- IF nManiConf = -1  
-    // error en la apertura 
-    ALERT('ERROR no puedo localizar <sdk.ini> ')
-    QUIT
-
- ENDIF
-
- // carga en buffer (cBuff) del fichero
- nBuff:=FSIZE(nManiConf)                    //tamaño del fichero
- cBuff:=SPACE(nBuff)                        // establezco tamaño a blancos
- FREAD(nManiConf,@cBuff,nBuff)              // cargo los valores
-
-
- // Recogida de parametros de fichero sdk.ini
- //******************************************
- // cargado en buffer todo el fichero .ini se van buscando CHR(13)+CHR(10)
- // saltos de linea
- // bucle de recorrido y carga de parametros
- DO WHILE ( n := AT( N_LIN, cBuff ) ) > 0   // busca saltos de linea
-    cTmp := LEFT( cBuff, n-1 )                        // corte menos la parada en CHR(13)
-    
-    // desechamos lo que recogimos en ctmp
-    cBuff := SUBSTR( cBuff, n+2)              // saltamos al siguiente pasando de chr(13)+chr(10)
-
-    // tratamiento de los cortes
-    IF SUBSTR(cTmp,1,1) <> '#' // por igual-> comentario, paso a siguiente linea
-       // funcion de recogida de parametros del fichero ini
-       loadpar(aPar,cTmp) 
-    ENDIF
-
- ENDDO 
- 
- // controlar el ultimo corte que nos quedo en cbuf si no se acabo con chr(13)+chr(10)
- IF SUBSTR(cBuff,1,1) <> '#' // por igual-> comentario, paso a siguiente linea
-    loadpar(aPar,cBuff) 
- ENDIF
- // cierre del archivo cutlog.ini
- FCLOSE(nManiConf)
 
 
 
@@ -567,7 +718,7 @@ for i in f_ini:
 
 
 # Variables indicativas del Sudoku (en siguientes versiones se pasaran atraves de un archivo de configuaracion <sdk.ini>)
-cSDK = "123456789"
+cSDK = apar["CADSDK"]
 nSDK = len(cSDK)
 nRSDK = int(nSDK**(1/2)) # raiz cuadrada
 
@@ -583,7 +734,7 @@ aInt = [""] * nSDK
 
 # apertura del fichero de donde recogeremos el sudoku a resolver por defecto  < sdk >
 try:
-    f_in = open("sdk", mode="r", encoding="utf-8")
+    f_in = open(apar["FILEIN"], mode="r", encoding="utf-8")
 
 except:
     alert("No puedo abrir el fichero de carga del sudoku")
@@ -624,7 +775,7 @@ Es interesante saber como podemos pasarle el sudoku a resolver, ejemplos:
  4      7
   7   3   
 
-La carga solo entiende la cadena de numerica: 123456789 y el caracter " " como casilla a resolver,
+La carga solo entiende la cadena numerica: 123456789 y el caracter " " como casilla a resolver,
 por tanto tratara de leer tantos caracteres validos como casillas tenga el sudoku. 81 en el caso de un sudoku de 9x9,
 asi que podemos pasar el sudoku a resolver como mas nos apetezca conocida como es la lectura. 
 """
@@ -719,14 +870,15 @@ for i in range(0,nSDK):
 #*************************
 nvuelta = 0
 check = 0
+aBruta = []
 while True:
 
     # el objetivo es agrupar las casillas resueltas por fila columa y cuadrado.
     ini_comp(aVar,aFil,aCol,aInt)
 
     # Control
-    print("Estado del sudoku al inicio de su resolucion y su evolucion. Vemos casillas resueltas y candidatos de las no resueltas.")
-    presenta(aVar)
+    # print("Estado del sudoku al inicio de su resolucion y su evolucion. Vemos casillas resueltas y candidatos de las no resueltas.")
+    # presenta(aVar)
     
     """
     if check ==1 :
@@ -755,7 +907,7 @@ while True:
 
 
     #***************************************************
-    # Estrategia SOLO PUDE SER ESE, poque es el unico **
+    # Estrategia SOLO PUDE SER ESE, porque es el unico **
 
     if lsal:
 
@@ -771,91 +923,167 @@ while True:
     #Estado de situación
     if lsal:
         aPend = situacion(aVar)
+        #print(aPend)
+        #alert()
 
-
-    # Si entramos en el if siguiente, hemos finalizado, si entramos en else a la siguiente estrategia (FUERZA BRUTA) 
+    # Si entramos en el if siguiente hemos encontrado al menos una solucion, si entramos con: ( nvuelta = 0 ) se ha resuelto entre 1º y 2º Estrategia
+    # y la solucion es unica. Si tuvo que resolverse por Fuerza Bruta ( nvuelta > 0 ) y la solucion puede ser unica o multiple.
+    
     if lsal and len(aPend) == 0:
         alert('¡¡¡¡ RESUELTO !!!!!')
         presenta(aVar)
-        break
+        # break
 
+                  
+        if nvuelta == 0:
+            break
+        else:
+            lsal = False
+
+
+    """
+    OJOJOJOJO
+    Antes de seguir adelante y antes de primera vuelta
+    verificar con aVar que sumando todos los elementos por filas,columnas, cuadrados
+    al menos estan todos los de la cadena maestra(4,9,16,25..)
+    es posible forzar algun ejemplo interesante: el sudoku mas grande del mundo
+     colocando en [1,2]:=4
+
+    """    
+
+    if nvuelta == 0:
+        if not congru_fil(aVar) and not congru_col(aVar) and not congru_cua(aVar):
+            alert("NO TIENE SOLUCIONES")
+            sys.exit(0)
+
+
+    """
+    *************************************************     
+    ****** LLegar a solucion por FUERZA BRUTA *******   
+    *************************************************
+    El metodo se basa en recorrer un arbol desde la base a las ramas.
+    para ello se ordenan las casillas sin resolver desde la de menor
+    numero de valores posibles hasta la mayor, empezando el recorrido por aquellas que menos se ramifican.
+    Os recuerdo que contiene aBruta un conjunto con esta estructura repetida [aVar,aPed, <un contador> ]
+    """
+    # alert("Entramos en Fuerza Bruta")
+
+    
+    # Ojo en primera vuelta siempre entrará por el (else) de este (if)
+    if not lsal:
+        # Bucle de pasos atras
+        while True:
+            # carga del estado anterior
+            
+            aVar = aBruta[-1][0].copy()
+            aPend = aBruta[-1][1].copy()
+            #print(aPend)
+            #alert("Devolucionn aBruta")
+            
+            #check
+            """
+            for i in aBruta:
+                presenta(i[0])
+            alert("*******************")
+            """
+
+
+
+            """
+            ¿Es el ultimo elemento tratado de los pendientes?
+            siempre toma  el primero siendo sus coordenadas aPend[0,0],aPend[0,1]  el aPend[0,2]=nº de posibles candidatos
+            se estudia sobres el ultimo añadido -> LEN(aBruta) 
+            se verifica si recorrimos todos los posibles valores
+            """
+            # Siempre trabajamos con el primero de aPend despues de ordenarlos
+            # Nuestro contador en aBruta es igual al tercer elemento de aPend (nº de candidatos) -> eliminar el ultimo
+            
+            #check
+            #print("Pos. Abruta",aBruta[-1][2],"Tam.aPend",aPend[0])
+            #presenta(aBruta[-1] [0])
+            #presenta(aVar)
+                        
+            if aBruta[-1][2] == aPend[0][2]:
+                aBruta.pop() 
+
+                # Salida de este bucle infinito
+                if len(aBruta) == 0 :
+                    sys.exit(0)
+
+            else:
+                break
+
+        # recoger el siguiente elemento de los posibles aumentando el contador
+        
+        nTmp = aBruta[-1][2] 
+
+
+        # asignamos ese posible valor a la casilla
+        # No le gusta asi:       aVar[aPend[0][0]][aPend[0][1]] = aVar[aPend[0][0]][aPend[0][1]][nTmp]
+        nFil = aPend[0][0]
+        nCol = aPend[0][1]
+        
+        """
+        print("Fila",nFil)
+        print("Col.",nCol)
+        presenta(aBruta[-1][0])
+        """
+        aVar[nFil][nCol] = aVar[nFil][nCol][nTmp]
+
+        # cargar contador
+        aBruta[-1][2] = nTmp +1
+
+
+
+    # han quedado elementos por resolver
     else:
-        alert('No conseguido. Siguiente paso fuerza BRUTA')
-        presenta(aVar)
-        break
+        # reordenamos aPend por el menor numero de cadidatos casilla 3º
+        aPend.sort(key=lambda tup:tup[2])
+        
+        # añadir elementos a aBruta
+        
+        # He tenido que crear un punto intermedio para cargar <aVar> se carga por referencia y no se porqué
+        vyt = []
+        for i in range(0,nSDK):
+            lvyt = []
+            for j in range(0,nSDK):
+                lvyt.append(aVar[i][j])
+            vyt.append(lvyt)
+        
+        # aBruta.append([aVar.copy(),aPend.copy(),1])
+        aBruta.append([vyt.copy(),aPend.copy(),1])
+                
 
-
-
-"""
-    **********************************
-    ****** Estado de SITUACION *******
-    **********************************
-
-    IF lsal
-       aPend:=situacion(aVar)
-    ENDIF
-
-    ***** FIN Estado de SITUACION *******
-
-
-    ******************************************
-    ****** Verificacion de CONGRUENCIA *******
-    ******************************************
-
-    *********************
-    ***** No hace falta verificacacion de congruencia **********
-    *********************
-
-    **********************************
-    ****** Carga de SOLUCIONES *******
-    *******aVar,aFil,aCol,aInt***************************
-    IF lsal .AND. LEN(aPend)=0  // no existen elementos pendientes
-       // conseguido
-       // alert('Conseguido y Congruente')
-
-       // distintas soluciones
-       IF lPreSol
-          alert('¡¡¡¡ AHI VA !!!!!')
-          Scroll()
-          presenta(aVar)
-       ENDIF
-
-       // carga en fichero de salida
-       writeSol(nManiOut,aVar)
-
-       // cuantas soluciones tiene
-       ++nSol
-
-       /*
-       // presentacion en pantalla de como va consiguiendo soluciones
-       @18,05 SAY 'Solución:' + STR(nSol)
-       */
-
-       // check
-       IF nSol=nNumSol  // nº maximo de soluciones que quiero que me de
-          EXIT
-       ENDIF
-
-
-       IF nVuelta = 0
-          EXIT  //salida del DO WHILE no hay mas soluciones
-       ELSE
-
-          // Punto de Control Particular
-          // alert("vuelta:"+ str(nVuelta))
-
-
-          // seguir siguientes soluciones en Fuerza Bruta
-          lsal:= .F.
-       ENDIF
-
-    ENDIF
+        """
+        for i in aBruta:
+                presenta(i[0])
+        alert("*******************")
+        """
+        """        
+        for i in aBruta:
+                print(i[1])
+                print()
+        alert("*******************")
+        """
 
 
 
 
+        #print(aBruta[-1][1])
+        #presenta(aBruta[-1][0]) 
 
-"""
+
+
+        # Coger el primer candidato y probar fila=aPend[1,1], columna=aPend[1,2]
+        # No le gusta asi : aVar[aPend[0][0]][aPend[0][1]] = aVar[aPend[0][0]][aPend[0][1]][0]
+        nFil = aPend[0][0]
+        nCol = aPend[0][1]
+        aVar[nFil][nCol] = aVar[nFil][nCol][0]
+
+
+    nvuelta += 1
+
+
 
 
 
