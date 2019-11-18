@@ -1,4 +1,4 @@
-#Acerca  
+##Acerca  
 
 Implementación de un algoritmo para la resolución de Sudokus cuadrados **de cualquier dimensión (4x4, 9x9, 16x16, 25x25, 36x36, ….)**. Siempre que definamos sus elementos con un solo carácter (letras, números, caracteres especiales) la dimensión es sólo cuestión de alimentar al SW.
 
