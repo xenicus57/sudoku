@@ -55,7 +55,7 @@ Esta versión amplia la anterior  implementando parte de la configuración a tra
 **Versión 03**  
 En esta versión se pondrán en marcha todos los elementos del fichero de configuración <sdk.ini> y se almacenarán sus resultados en archivo. Esta versión es Completa y Plenamente Operativa.
 
-###SDK_v04.py
+### SDK_v04.py
 **Versión 04**  
 Esta versión amplia la versión anterior implementado una nueva estrategia de solución, antes de pasar a Fuerza Bruta. Estrategia PAR DESNUDO o DOBLE PAREJA.
 
