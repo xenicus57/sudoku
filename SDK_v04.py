@@ -1,7 +1,8 @@
 """
-SDK_v03.py
-Version 03
-En esta version se pondran en marcha todos los elementos del fichero de configuracion <sdk.ini> y se almacenará resultados en fichero.
+SDK_v04.py
+Version 04
+En esta version se pondran en marcha una nueva estrategia antes de pasar a fuerza bruta.
+Estrategia PAR DESNUDO o DOBLE PAREJA
 
 ******************
 *** FINALIZADO ***
@@ -307,12 +308,13 @@ def Bucle1(aVar,aFil,aCol,aInt,nvuelta):
                         # Hallamos una INCONGRUENCIA 
                         # La incongruencia hallada nos llevará a Fuerza Bruta probando con el siguiente candidato o si fuera el ultimo
                         # a quitar el ultimo elemento de aBruta (deshacemos la pila) y probar con los anteriores
+                        #presenta(aVar)
                         return False
 
                     # Hemos encontrado solo 1 es por tanto la solucion de esa casilla
                     if len(aVar[i][j]) == 1:
                         
-                        # si queremos ver por pantalla como se generan las soluciones
+                        # si queremos ver por pantalla como se generan las soluciones, modificar el fichero de configuración <sdk.ini>
                         if apar["SOLEST1"]:
                             quien("1º Estrategia: ", i, j, aVar[i][j])
                        
@@ -377,7 +379,7 @@ def est_Cmp(aVar,aTmp,aFil,aCol,aInt):
             for j in aTmp:
                 if i in j[2]:
                     
-                    # si queremos ver por pantalla como se generan las soluciones
+                    # si queremos ver por pantalla como se generan las soluciones, modificar el fichero de configuración <sdk.ini>
                     if apar["SOLEST2"]:
                         quien("2º Estrategia: ", j[0], j[1], i)
                     
@@ -672,7 +674,7 @@ def writesol(aSol,aVar,lmas):
     if lmas:
         aSol.append(cTmp)
     else:
-        aSol[11] = cTmp
+        aSol[12] = cTmp
     
     
     return None
@@ -691,6 +693,9 @@ def presCompl(aTm):
     Una cadena formateada
 
     """
+    if len(aTm) == 0:
+       return "* Combinaciones Posibles: NO NECESARIO "  + N_LIN
+
     cTot =  "* Combinaciones Posibles:  "  + N_LIN
     for i in range(0,nSDK):
         cTmp = ""
@@ -744,6 +749,306 @@ def cargar_solucion(handle,aSol):
         
     return None
 
+#********************************
+def est_Dpareja_Fil(parj,nFil,nCol,mCol):
+#********************************
+    """
+    Funcion que aplicará en aVar la estrategia de Par Desnudo/Doble Pareja a una fila
+    
+    Argumentos: 
+    parj -> pareja de 2 caracteres
+    nFil -> Int Entero que nos indica en que fila se ha encontrado la doble pareja igual
+    nCol -> Int Entero que nos indica una de las columnas
+    mCol -> Int Entero que nos indica la otra columna
+    
+    Devuelve:
+    Actualiza aVar 
+    0 -> No hemos conseguido reducir
+    1 -> Hemos conseguido reducir a un 1 candidato
+    2 -> Hemos reducido pero tenemos mas de un candidato
+    3 -> INCONGRUENCIA
+    
+    """
+    # recojo cada elemento de la pareja
+    n1 = parj[0]
+    n2 = parj[1]
+    nsal = 0
+
+    #check
+    #print("Entrada Fila:",parj)
+    #presenta(aVar)
+
+
+    for j in range(0,nSDK):
+        # Evito las columnas donde se encuentra las parejas
+        if j != nCol and j != mCol:
+            if len(aVar[nFil][j]) >= 2:
+                # cuantos elementos tenia la casilla a tratar 
+                nini = len(aVar[nFil][j])
+                aVar[nFil][j] = aVar[nFil][j].replace(n1,"")
+                aVar[nFil][j] = aVar[nFil][j].replace(n2,"")
+                
+                # cuantos al finalizar
+                nfin = len(aVar[nFil][j])
+                # hemos reducido
+                if nfin != nini:
+                    if nfin == 0: 
+                        #INCONGRUENCIA 
+                        return 3
+                    if nfin == 1:
+                        # si queremos ver por pantalla como se generan las soluciones, modificar el fichero de configuración <sdk.ini>
+                        if apar["SOLEST3"]:
+                            quien("3º Estrategia: ", nFil, j, aVar[nFil][j])
+
+                    if nsal != 1:   # Si ya obtuvimos una reduccion al 1 no entramos
+                        if nfin == 1:
+                            nsal = 1
+                        else:
+                            nsal = 2
+
+    #check
+    #print("Salida Fila:")
+    #presenta(aVar)
+
+    return nsal 
+
+#********************************
+def est_Dpareja_Col(parj,nCol,nFil,mFil):
+#********************************
+    """
+    Funcion que aplicará en aVar la estrategia de Par Desnudo/Doble Pareja a una Columna
+    
+    Argumentos: 
+    parj -> pareja de 2 caracteres
+    nCol -> Int Entero que nos indica en que columna se ha encontrado la doble pareja igual
+    nFil -> Int Entero que nos indica una de las filas
+    mFil -> Int Entero que nos indica la otra fila
+    
+    Devuelve:
+    Actualiza aVar 
+    0 -> No hemos conseguido reducir
+    1 -> Hemos conseguido reducir a un 1 candidato
+    2 -> Hemos reducido pero tenemos mas de un candidato  
+    3 -> INCONGRUENCIA
+    
+    """
+    # recojo cada elemento de la pareja
+    n1 = parj[0]
+    n2 = parj[1]
+    nsal = 0
+
+    #check
+    #print("Entrada Columna",parj)
+    #presenta(aVar)
+
+    for j in range(0,nSDK):
+        if j != nFil and j != mFil:
+            if len(aVar[j][nCol]) >= 2:
+                # cuantos elementos tenia la casilla a tratar 
+                nini = len(aVar[j][nCol])
+                aVar[j][nCol] = aVar[j][nCol].replace(n1,"")
+                aVar[j][nCol] = aVar[j][nCol].replace(n2,"")
+                
+                # cuantos al finalizar
+                nfin = len(aVar[j][nCol])
+                # hemos reducido
+                if nfin != nini:
+                    if nfin == 0: 
+                        #INCONGRUENCIA 
+                        return 3
+                    
+                    if nfin == 1:
+                        # si queremos ver por pantalla como se generan las soluciones, modificar el fichero de configuración <sdk.ini>
+                        if apar["SOLEST3"]:
+                            quien("3º Estrategia: ", nFil, j, aVar[j][nCol])
+
+                    if nsal != 1: # Si ya obtuvimos una reduccion al 1 no entramos
+                        if nfin == 1:
+                            nsal = 1
+                        else:
+                            nsal = 2
+
+
+    #check
+    #print("Salida Columna")
+    #presenta(aVar)
+    return nsal
+
+#********************************
+def est_Dpareja_Cua(parj,ncua,ni,nj,mi,mj):
+#********************************
+    """
+    Funcion que aplicará en aVar la estrategia de Par Desnudo/Doble Pareja a un Cuadro/Region
+    
+    Argumentos: 
+    parj -> pareja de 2 caracteres
+    ncua -> Int Entero que nos indica el cuadro afectado 
+    ni -> Int Entero que nos indica en que fila se ha encontrado una pareja igual
+    nj -> Int Entero que nos indica en que columna se ha encontrado una pareja igual
+    mi -> Int Entero que nos indica en que fila se ha encontrado la otra pareja igual
+    mj -> Int Entero que nos indica en que columna se ha encontrado la otra pareja igual
+    
+    Devuelve:
+    Actualiza aVar 
+    0 -> No hemos conseguido reducir
+    1 -> Hemos conseguido reducir a un 1 candidato
+    2 -> Hemos reducido pero tenemos mas de un candidato
+    3 -> INCONGRUENCIA  
+    
+    """
+    # recojo cada elemento de la pareja
+    n1 = parj[0]
+    n2 = parj[1]
+    nsal = 0
+
+    #check
+    #print("Entrada Region",ncua,parj)
+    #presenta(aVar)
+
+    nFil = (int(ncua/nRSDK)*nRSDK) - 1
+    for j in range(0,nRSDK):
+        nFil += 1
+        nCol = ((ncua%nRSDK)*nRSDK) -1
+
+        for k in range(0,nRSDK):
+            nCol +=1
+            if not ( (nFil == ni and nCol == nj) or (nFil == mi or nCol == mj) ):  # ninguna de las casillas que son iguales
+               if len(aVar[nFil][nCol]) >= 2:
+
+                    # cuantos elementos tenia la casilla a tratar 
+                    nini = len(aVar[nFil][nCol])
+                    aVar[nFil][nCol] = aVar[nFil][nCol].replace(n1,"")
+                    aVar[nFil][nCol] = aVar[nFil][nCol].replace(n2,"") 
+
+                    # cuantos al finalizar
+                    nfin = len(aVar[nFil][nCol])
+                    # hemos reducido
+                    if nfin != nini:
+                        if nfin == 0: 
+                            #INCONGRUENCIA 
+                            return 3
+
+                        if nfin == 1:
+                        # si queremos ver por pantalla como se generan las soluciones, modificar el fichero de configuración <sdk.ini>
+                            if apar["SOLEST3"]:
+                                quien("3º Estrategia: ", nFil, j, aVar[nFil][nCol])
+
+                        if nsal != 1: # Si ya obtuvimos una reduccion al 1 no entramos
+                            if nfin == 1:
+                                nsal = 1
+                            else:
+                                nsal = 2
+
+    #check
+    #print("Salida Region",ncua)
+    #presenta(aVar)
+
+    return nsal  
+
+#************************
+def Bucle3(aVar,aFil,aCol,aInt,aPend):
+#************************
+    """
+    Esta funcion tratara de aplicar la estrategia de Par desnudo/doble pareja. Repetiremos el proceso mientras logremos reducir candidatos, si en algun
+    momento logramos encontrar el candidato unico de una casilla, al finalizar todo el proceso de reduccion de candidatos iniciaremos el proceso
+     desde la 1º estrategia
+    Ejemplo:
+    Fijemonos en el cuadro de mas a la derecha, tenemos una pareja de candidatos repetida "28", nos idica que dichos valores solo pueden estar en 
+    dichas casillas, lo que nos permite quitar cualquiera de estos dos candidatos en el resto.
+    ------------------------------------------------------
+    !  349|    5|  246! 2389| 2368|    7!    1|   28| 2469!
+    !    1| 2368|   26! 2389|    4|    5!    7|   28|  269!
+    !  479|  268| 2467!    1|  268|  689!    5|    3| 2469!
+    -------------------------------------------------------
+    Despues de aplicar dicha estrategia el cuadro quedaria:
+    ------------------------------------------------------
+    !  349|    5|  246! 2389| 2368|    7!    1|   28|  469!
+    !    1| 2368|   26! 2389|    4|    5!    7|   28|   69!
+    !  479|  268| 2467!    1|  268|  689!    5|    3|  469!
+    -------------------------------------------------------
+    En nuestro caso el candidato "2" desaparece del resto de casillas.
+
+    Argumentos:
+    Se pasan las listas (aVar,aFil,aCol,aInt,aPend) por referencia.
+
+    Devuelve: Un entero
+    0 -> No conseguimos reducir
+    1 -> Redujimos una casilla a 1 solo
+    2 -> Redujimos
+    3 -> INCONGRUENCIA 
+
+    """
+
+    aPend.sort(key=lambda tup:tup[2])
+    n = 0
+    m = 0
+    salEst = 0
+    nEst = 0
+    # la siguiente variable nos permite seguir analizando mientras tengamos exito
+    lexito = False
+
+    while len(aPend) > n and aPend[n][2] == 2:
+
+        m = n + 1
+        while len(aPend) > m and aPend[m][2] == 2:
+            
+            if aVar[aPend[n][0]][aPend[n][1]] == aVar[aPend[m][0]][aPend[m][1]] :
+                
+                # recojo la doble pareja
+                pareja = aVar[aPend[n][0]][aPend[n][1]]
+                
+                if aPend[m][0] == aPend[n][0]:  # Están en la misma fila
+                    # proceso
+                    nEst = est_Dpareja_Fil(pareja,aPend[n][0],aPend[n][1],aPend[m][1])
+                    
+                    if nEst == 3:
+                        return 3 # INCONGRUENCIA
+                    elif nEst != 0:
+                        if nEst ==1:
+                           salEst = 1 
+                        lexito = True
+                        break
+                
+                if aPend[m][1] == aPend[n][1]:  # Están en la misma columna
+                    # proceso
+                    nEst =  est_Dpareja_Col(pareja,aPend[n][1],aPend[n][0],aPend[m][0])
+                    
+                    if nEst == 3:
+                        return 3 # INCONGRUENCIA
+                    elif nEst != 0:
+                        if nEst ==1:
+                            salEst = 1 
+                        lexito = True
+                        break
+                
+                # Calcular a que Cuadro/Region pertenece
+                nReg = ele_Int(aPend[n][0],aPend[n][1])
+                mReg = ele_Int(aPend[m][0],aPend[m][1])
+                if mReg  == nReg: # estan en el mismo Cuadro/Región 
+                    # proceso 
+                    nEst = est_Dpareja_Cua(pareja,nReg,aPend[n][0],aPend[n][1],aPend[m][0],aPend[m][1])
+                  
+                    if nEst == 3:
+                        return 3 # INCONGRUENCIA
+                    elif nEst != 0:
+                        if nEst ==1:
+                           salEst = 1 
+                        lexito = True
+                        break
+                    
+            m += 1
+
+        # si conseguimos reducir, recalcularemos y volveremos a iniciar el proceso
+        if lexito:
+            aPend = situacion(aVar)
+            aPend.sort(key=lambda tup:tup[2])
+            lexito = False
+            n = -1
+            m= 0
+
+        n += 1
+
+    return salEst
 
 #*************************
 #*************************
@@ -775,7 +1080,12 @@ aPend ->Lista de ?x3 de las casillas no conseguidas (?) todas en formato -> int
         aPend[6,3]-> tiene 4 posibles candidatos
 
 aBruta ->   array de ?x3 con el siguiente contenido {aVar,aPend,contador} como vemos
-            contiene 2 arrays ya comentados y un contador.
+            contiene 2 arrays ya comentados y un entero que se utiliza de contador.
+nvuelta -> Entero que cuando es distinto de cero nos indica que estamos tratando la solucion con Fuerza Bruta
+            que no es mas que una especulacion que puede ser cierta o falsa.
+lsal -> Booleano que controla la salida de las estrategias de resolucion, mientras sea True, vamos bien,
+        si nos devuelve False, es porque en algun momento entramos en fuerza bruta y hemos hallado una incongruencia
+        no hay solucion para una casilla y hemos de dar pasos atras.
 """
 
 #******************************************************************************
@@ -800,7 +1110,6 @@ except:
     alert("No puedo abrir el fichero <sdk.ini> de carga de configuracion del sudoku")
     sys.exit(0)
 
-# Carga de los parametros del fichero de configuracion
 for i in f_ini:
     if i[0] != "#" :
         loadpar(apar,i)
@@ -903,17 +1212,18 @@ except:
 
 # Preparando la Solucion que al final escribiremos en fichero
 aSol = [ N_LIN + "*" * 40 + N_LIN ,                                             # 0
-         "* Fecha-Hora:" + str(datetime.now()) + N_LIN ,                        # 1
-         "* Tipo:" + cSDK + N_LIN ,                                             # 2
-         "* Nº Max. de Soluciones Buscadas:" +str(apar["NUMSOL"]) + N_LIN ,     # 3
-         "*" + "-" * 40 + N_LIN,                                                # 4
-         "" ,                                                                   # 5 Altura Maxima Probable
-         "" ,                                                                   # 6 Altura Maxima Alcanzada
-         "" ,                                                                   # 7 Combinaciones posibles
-         "" ,                                                                   # 8 Combinaciones probadas
-         "" ,                                                                   # 9 Soluciones Halladas
-         "*" * 40 + N_LIN ,                                                     #10 
-         "" ]                                                                   #11 Sudoku a resolver
+         "* Fecha-Hora: " + str(datetime.now()) + N_LIN ,                        # 1
+         "* Tipo: " + str(nSDK) + "x" + str(nSDK) + N_LIN ,                      # 2
+         "* Elementos Base: " + cSDK + N_LIN ,                                   # 3
+         "* Nº Max. de Soluciones Buscadas: " +str(apar["NUMSOL"]) + N_LIN ,     # 4
+         "*" + "-" * 40 + N_LIN,                                                # 5
+         "" ,                                                                   # 6 Altura Maxima Probable
+         "" ,                                                                   # 7 Altura Maxima Alcanzada
+         "" ,                                                                   # 8 Combinaciones posibles
+         "" ,                                                                   # 9 Combinaciones probadas
+         "" ,                                                                   #10 Soluciones Halladas
+         "*" * 40 + N_LIN ,                                                     #11 
+         "" ]                                                                   #12 Sudoku a resolver
          # esta lista ira creciendo con las soluciones encontradas
 
 # cargar sudoku a resolver
@@ -987,17 +1297,20 @@ for i in range(0,nSDK):
 #*************************
 nSol = 0 # numero de soluciones
 nvuelta = 0
-check = 0
+check = 0 # varible para chequeo del programador
 aBruta = []
 nArbReal = 0
+nArbMax = 0
+aComMax = []
+
 while True:
 
     # el objetivo es agrupar las casillas resueltas por fila columa y cuadrado.
     ini_comp(aVar,aFil,aCol,aInt)
 
     # Check
-    # print("Estado del sudoku al inicio de su resolucion y su evolucion. Vemos casillas resueltas y candidatos de las no resueltas.")
-    # presenta(aVar)
+    #print("Estado del sudoku al inicio de su resolucion y su evolucion. Vemos casillas resueltas y candidatos de las no resueltas.")
+    #presenta(aVar)
     
     """
     if check ==1 :
@@ -1010,7 +1323,7 @@ while True:
         alert()
     """
 
-    # Variable de control, para pasar a 2º estrategia si no encontramos mas elementos con la estrategia 1º
+    # Variable de control, para pasar a 2º ó 3º estrategia si no encontramos mas elementos con la estrategia 1º
     lsal = True
 
     #***********************
@@ -1039,14 +1352,34 @@ while True:
     # FIN estrategia SOLO PUDE SER ESE, poque es el unico (UNICO OCULTO)**
     #*******************************************************
 
-    #Estado de situación
+
+    #***************************************************
+    # Estrategia Par Desnudo o Doble Pareja **
+    
     if lsal:
         aPend = situacion(aVar)
-        presenta(aVar)
+        #presenta(aVar)
+        nEst3 = Bucle3(aVar,aFil,aCol,aInt,aPend)
+        # analizamos la salida
+        if nEst3 == 3:
+            lsal = False # Entre en fuerza bruta a deshacer
+        elif nEst3 == 1:
+            continue    
+    
+    # FIN estrategia Par Desnudo o Doble Pareja **
+    #*******************************************************
+
+
+    #Estado de situación
+    # Con la entrada de la 3º estrategia posiblemente el if siguiente no sea necesario
+    # Posiblemente tampoco los procesos de ordenacion de Fuerza Bruta
+    if lsal:
+        aPend = situacion(aVar)
+        #presenta(aVar)
         #print(aPend)
         #alert()
 
-    # Si entramos en el if siguiente hemos encontrado al menos una solucion, si entramos con: ( nvuelta = 0 ) se ha resuelto entre 1º y 2º Estrategia
+    # Si entramos en ereordenaremosl if siguiente hemos encontrado al menos una solucion, si entramos con: ( nvuelta = 0 ) se ha resuelto entre 1º, 2º y  3º Estrategia
     # y la solucion es unica. Si tuvo que resolverse por Fuerza Bruta ( nvuelta > 0 ) y la solucion puede ser unica o multiple.
     
     if lsal and len(aPend) == 0:
@@ -1059,7 +1392,7 @@ while True:
         # contador del numero de soluciones
         nSol += 1
 
-        if nSol == apar["NUMSOL"]: # Hemos llegado al tope de soluciones que queriamos
+        if nSol == apar["NUMSOL"]: # Hemos llegado al tope de soluciones que queriamos, modificar el fichero de configuración <sdk.ini> si queremos cambiarlo
             break
                   
         if nvuelta == 0:    # salida del While no hay mas soluciones
@@ -1074,7 +1407,7 @@ while True:
     verificar con aVar que sumando todos los elementos por filas,columnas, cuadrados
     al menos estan todos los de la cadena maestra(4,9,16,25..)
     es posible forzar algun ejemplo interesante: el sudoku mas grande del mundo
-     colocando en [1,2]:=4
+    colocando en [1,2]:=4
 
     """    
 
@@ -1083,15 +1416,16 @@ while True:
             alert("NO TIENE SOLUCIONES")
             sys.exit(0)
 
-    if nvuelta == 0:
+        # Inicio de estadisticas -> carga de trabajo
         # maxima altura arborea prevista
         nArbMax = len(aPend)
 
         # Maximas combinaciones posibles
         aComMax = copy.deepcopy(aVar)
+        l1Pas = False
         
 
-    # Estado antes de entrar en resolucion arborea (Fuerza Bruta)
+    # Estado antes de entrar en resolucion arborea (Fuerza Bruta) si queremos verlo modificar el fichero de configuración <sdk.ini>
     if apar["VERALTARB"]:
         presenta(aVar)
 
@@ -1100,15 +1434,15 @@ while True:
     *************************************************     
     ****** LLegar a solucion por FUERZA BRUTA *******   
     *************************************************
-    Crearemos una pila con aBruta que contendrá: 
+    Crearemos una lista que trabajrá como una pila <aBruta> que contendrá una matriz de ?x3 con los siguientes elementos: 
     - Situación de aVar (tendremos casillas con solucion y casillas con candidatos)
     - La tabla asociada aPend, que contiene solo las casillas con candidatos [fila,columna,nº de candidatos] se cargará en aBruta ordenandolo
       previamente por el tercer elemento (nº de candidatos) de menor a mayor
     - Un contador de aBruta
 
      Empezaremos con el primer elemento de aPend, el de menor numero de candidatos, tomaremos el primer candidato como si fuese la solución y le haremos 
-     que circule por la 1º y 2º estrategia tratando de encontrar la solución, si no lo conseguimos y nos vemos forzados a entrar en fuerza bruta
-     volveremos a  cargar aBruta como lo hicimos anteriormente un nuevo elemento en la pila, con la situacion de aVar, aPend y el contador de aBruta,   
+     que circule por la 1º, 2º y 3º  estrategia tratando de encontrar la solución, si no lo conseguimos y nos vemos forzados a entrar en fuerza bruta
+     volveremos a  cargar aBruta como lo hicimos anteriormente como un nuevo elemento en la pila, con la situacion de aVar, aPend y el contador de aBruta,   
 
     """
     # alert("Entramos en Fuerza Bruta")
@@ -1152,11 +1486,11 @@ while True:
                 # Salida de este bucle infinito
                 if len(aBruta) == 0 :
                     
-                    aSol[5] = "* Altura Maxima Probable:  " + str(nArbMax).rjust(4) + N_LIN
-                    aSol[6] = "* Altura Maxima Alcanzada:  " + str(nArbReal).rjust(4) + N_LIN
-                    aSol[7] = presCompl(aComMax)
-                    aSol[8] = "* Combinaciones Probadas:  "+str(nvuelta).rjust(6)  + N_LIN
-                    aSol[9] = "* Soluciones Halladas:  "+str(nSol).rjust(6)  + N_LIN
+                    aSol[6] = "* Altura Maxima Probable:  " + str(nArbMax).rjust(4) + N_LIN
+                    aSol[7] = "* Altura Maxima Alcanzada:  " + str(nArbReal).rjust(4) + N_LIN
+                    aSol[8] = presCompl(aComMax)
+                    aSol[9] = "* Combinaciones Probadas:  "+str(nvuelta).rjust(6)  + N_LIN
+                    aSol[10] = "* Soluciones Halladas:  "+str(nSol).rjust(6)  + N_LIN
                     
                     alert('Soluciones: '+str(nSol))
                     cargar_solucion(f_out,aSol)
@@ -1180,7 +1514,7 @@ while True:
         nFil = aPend[0][0]
         nCol = aPend[0][1]
         
-        print("Pos.",nFil,nCol,"Casilla",aVar[nFil][nCol])
+        # print("Pos.",nFil,nCol,"Casilla",aVar[nFil][nCol])
         
         
         
@@ -1189,7 +1523,7 @@ while True:
         # aumentamos el contador
         aBruta[-1][2] = nTmp +1
 
-        # si queremos ver por pantalla como se generan las soluciones
+        # si queremos ver por pantalla como se generan las soluciones modificar el fichero de configuración <sdk.ini>
         if apar["FUERBRT"]:
             quien("Fuerza Bruta: ", aPend[0][0],aPend[0][1], aVar[aPend[0][0]][aPend[0][1]] )
 
@@ -1235,6 +1569,7 @@ while True:
         # Cambiamos esta sintaxis:  aVar[aPend[0][0]][aPend[0][1]] = aVar[aPend[0][0]][aPend[0][1]][0] por la siguiente
         nFil = aPend[0][0]
         nCol = aPend[0][1]
+        # asigno el primer candidato a esta casilla (especulo)
         aVar[nFil][nCol] = aVar[nFil][nCol][0]
 
         # si queremos ver por pantalla como se generan las soluciones
@@ -1242,17 +1577,17 @@ while True:
             quien("Fuerza Bruta: ", aPend[0][0],aPend[0][1], aVar[aPend[0][0]][aPend[0][1]] )
 
 
-    # estadisticas altura maxima real del arbol alcanzado
+    # estadisticas de altura maxima real del arbol alcanzado
     nArbReal =  len(aBruta) if len(aBruta) > nArbReal else nArbReal
 
     nvuelta += 1
     
 # Carga y escritura en el fichero de soluciones
-aSol[5] = "* Altura Maxima Probable:  " + str(nArbMax).rjust(4) + N_LIN
-aSol[6] = "* Altura Maxima Alcanzada:  " + str(nArbReal).rjust(4) + N_LIN
-aSol[7] = presCompl(aComMax)
-aSol[8] = "* Combinaciones Probadas:  "+str(nvuelta).rjust(6)  + N_LIN
-aSol[9] = "* Soluciones Halladas:  "+str(nSol).rjust(6)  + N_LIN
+aSol[6] = "* Altura Maxima Probable:  " + str(nArbMax).rjust(4) + N_LIN
+aSol[7] = "* Altura Maxima Alcanzada:  " + str(nArbReal).rjust(4) + N_LIN
+aSol[8] = presCompl(aComMax)
+aSol[9] = "* Combinaciones Probadas:  "+str(nvuelta).rjust(6)  + N_LIN
+aSol[10] = "* Soluciones Halladas:  "+str(nSol).rjust(6)  + N_LIN
                     
 alert('Soluciones: '+str(nSol))
 cargar_solucion(f_out,aSol)

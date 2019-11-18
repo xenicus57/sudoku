@@ -1,0 +1,146 @@
+
+****************************************
+* Fecha-Hora:2019-10-23 19:20:57.910931
+* Tipo:123456789ABCDEFGHIJKLMNOP
+* Nº Max. de Soluciones Buscadas:5
+*----------------------------------------
+* Altura Maxima Probable:   168
+* Altura Maxima Alcanzada:    29
+* Combinaciones Posibles:  
+ 4| 6| 3| 5| 5| 9| 8| 8|10|  | 7| 4| 7| 5| 7| 6| 4| 3| 8| 8| 6| 8| 2| 7| 5|
+ 4| 6| 3| 4| 5| 9|  |  |10| 3| 7| 4| 6| 4| 6| 5| 3| 3| 8| 8| 6| 7| 2|  | 4|
+ 2| 4|  | 4|  | 7| 6| 6|  |  |  | 4|  | 4| 6| 4| 3|  | 5| 4| 6|  |  | 6|  |
+ 3| 4| 2| 2| 3|  | 7| 6| 7| 3|  |  |  | 3| 4| 4|  | 3| 5|  |  | 6|  |  |  |
+  | 3|  | 3| 4| 6| 3|  | 6| 2|  | 2| 4|  |  |  |  |  |  | 3|  | 6|  |  |  |
+---------------------------------------------------------------------------
+  | 2|  |  | 2| 2|  | 2|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+---------------------------------------------------------------------------
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+---------------------------------------------------------------------------
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  | 2| 2| 4|  | 2|  |  |  |  |  |  |  |  |  |  | 4|  | 4| 4|
+  |  |  |  |  | 2| 2|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 2| 2|  | 2|  |
+  |  |  |  |  |  | 2|  | 4|  |  |  | 2|  |  |  |  |  |  |  |  | 3|  | 3| 3|
+---------------------------------------------------------------------------
+  |  |  |  |  | 4|  |  | 2|  | 3|  | 3|  |  |  | 4|  | 3| 2| 3|  |  | 2|  |
+  |  |  |  |  | 7| 6|  | 7|  | 5|  | 2|  | 3| 2|  |  | 5| 4| 4|  |  | 3| 5|
+  |  |  |  |  | 4| 6| 7| 5|  | 5|  | 5|  |  |  |  |  | 5| 4| 3| 6|  | 4| 7|
+  |  |  |  |  | 4| 5| 5| 5|  | 5|  | 5|  | 2|  | 3|  | 5| 5|  |  |  |  | 4|
+  |  |  |  |  | 8| 4| 5| 7|  | 7|  | 4| 4| 4| 4|  |  | 4| 4| 5| 6|  | 5| 5|
+---------------------------------------------------------------------------
+* Combinaciones Probadas:   20706
+* Soluciones Halladas:       1
+****************************************
+                               MO               6     G   4N5 J    C   I9 F     9    N6K   M  FE GD4O P    5  I    H16E C JNA      K B         A17F6E5 FLG2I1A5EK7N8P69HOM3 BJCJNH EC3FM8OL91 7D2KB 4PIGIK5P9 76D4AG BM3EJ8C1 OLH7A1B3JOH2G6C EI FP4L9NKM8 3C K7E  F 5P2J8LG9HDO B 26IEJ  8A5DO1CKBP  4MHL 7GOD7H 4BILFN36   K5A8 E PP5BL1OC 9JH8A47I2E6DNG3FKN9 FMD2 HPEBIGL1C73O5JA 6812 CAFIO GK4DNL7 P6JE5HMDMGI62   K 1 O J 4H   C  L7J5B  GEC3PM  DNF18OA  9 4 ON5 1LD HBJ EKAM   I  EPKHA    B F 56C3OI G D   GN3L 8      ACK     P7  FH784  2 O D 3  I5    M  K MAP    I 4 NGF 9    H  1BED     A 9 K G     8 C CI JO    H M    6D    N  
+9JAK7FICG6BEOLD243N5HM8P15E4NDHMOJ18ACPF9BLGIK7263H862GKBE4N53JM1PACD7LI9OFBC31I9ALP2N6K7HOM8JFE5GD4OLPMF8D537I2G94H16EKCBJNAMDOC8LKPB94J2H3NGIA17F6E54FLG2I1A5EK7N8P69HOM3DBJCJNH6EC3FM8OL9157D2KBA4PIGIK5P9N76D4AGFBM3EJ8C12OLH7A1B3JOH2G6CDEI5FP4L9NKM8A3C4K7EN6FM5P2J8LG9HDO1BI26IEJ3G8A5DO1CKBPNF4MHL97GOD7H14BILFN369MJK5A8CE2PP5BL1OCM9JH8A47I2E6DNG3FKN98FMD2KHPEBIGL1C73O5JA468129CAFIO3GK4DNL7BP6JE5HMDMGI62P7NKL1EOAJ54H9F3C8BL7J5B6HGEC3PMI2DNF18OA4K934FON591LDCHBJ8EKAMGP6I72EPKHAMJ48B9F756C3OI2GLD1N6GN3LE89FM2IHACKO1BJ4P75DFH784P62KO1DL3EAI5CNB9MGJK2MAPBLDCIJ45NGF897E61H3O1BED54NJ7AP96KOGHM23I8FCLCI9JOG531H7M8FB46DLP2KNAE
+
+
+
+
+****************************************
+* Fecha-Hora:2019-11-06 20:33:01.704813
+* Tipo:123456789ABCDEFGHIJKLMNOP
+* Nº Max. de Soluciones Buscadas:100
+*----------------------------------------
+* Altura Maxima Probable:   168
+* Altura Maxima Alcanzada:    27
+* Combinaciones Posibles:  
+ 4| 6| 3| 5| 5| 9| 8| 8|10|  | 7| 4| 7| 5| 7| 6| 4| 3| 8| 8| 5| 8| 2| 6| 5|
+ 4| 6| 3| 4| 5| 9|  |  |10| 3| 7| 4| 6| 4| 6| 5| 3| 3| 8| 8| 6| 7| 2|  | 4|
+ 2| 4|  | 4|  | 7| 6| 6|  |  |  | 4|  | 4| 6| 4| 3|  | 5| 4| 5|  |  | 5|  |
+ 3| 4| 2| 2| 3|  | 7| 6| 7| 3|  |  |  | 3| 4| 4|  | 3| 5|  |  | 6|  |  |  |
+  | 3|  | 3| 4| 6| 3|  | 6| 2|  | 2| 4|  |  |  |  |  |  | 3|  | 6|  |  |  |
+---------------------------------------------------------------------------
+  | 2|  |  | 2| 2|  | 2|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+---------------------------------------------------------------------------
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+---------------------------------------------------------------------------
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  | 2| 2| 4|  | 2|  |  |  |  |  |  |  |  |  |  | 4|  | 4| 4|
+  |  |  |  |  | 2| 2|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 2| 2|  | 2|  |
+  |  |  |  |  |  | 2|  | 4|  |  |  | 2|  |  |  |  |  |  |  |  | 3|  | 3| 3|
+---------------------------------------------------------------------------
+  |  |  |  |  | 4|  |  | 2|  | 3|  | 3|  |  |  | 4|  | 3| 2| 3|  |  | 2|  |
+  |  |  |  |  | 7| 6|  | 7|  | 5|  | 2|  | 3| 2|  |  | 5| 4| 4|  |  | 3| 5|
+  |  |  |  |  | 4| 6| 7| 5|  | 5|  | 5|  |  |  |  |  | 5| 4| 3| 6|  | 4| 7|
+  |  |  |  |  | 4| 5| 5| 5|  | 5|  | 5|  | 2|  | 3|  | 5| 5|  |  |  |  | 4|
+  |  |  |  |  | 8| 4| 5| 7|  | 7|  | 4| 4| 4| 4|  |  | 4| 4| 5| 6|  | 5| 5|
+---------------------------------------------------------------------------
+* Combinaciones Probadas:   12078
+* Soluciones Halladas:       1
+****************************************
+                               MO               6     G   4N5 J    C   I9 F     9    N6K   M  FE GD4O P    5  I    H16E C JNA      K B         A17F6E5 FLG2I1A5EK7N8P69HOM3 BJCJNH EC3FM8OL91 7D2KB 4PIGIK5P9 76D4AG BM3EJ8C1 OLH7A1B3JOH2G6C EI FP4L9NKM8 3C K7E  F 5P2J8LG9HDO B 26IEJ  8A5DO1CKBP  4MHL 7GOD7H 4BILFN36   K5A8 E PP5BL1OC 9JH8A47I2E6DNG3FKN9 FMD2 HPEBIGL1C73O5JA 6812 CAFIO GK4DNL7 P6JE5HMDMGI62   K 1 O J 4H   C  L7J5B  GEC3PM  DNF18OA  9 4 ON5 1LD HBJ EKAM   I  EPKHA    B F 56C3OI G D   GN3L 8      ACK     P7  FH784  2 O D 3  I5    M  K MAP    I 4 NGF 9    H  1BED     A 9 K G     8 C CI JO    H M    6D    N  
+9JAK7FICG6BEOLD243N5HM8P15E4NDHMOJ18ACPF9BLGIK7263H862GKBE4N53JM1PACD7LI9OFBC31I9ALP2N6K7HOM8JFE5GD4OLPMF8D537I2G94H16EKCBJNAMDOC8LKPB94J2H3NGIA17F6E54FLG2I1A5EK7N8P69HOM3DBJCJNH6EC3FM8OL9157D2KBA4PIGIK5P9N76D4AGFBM3EJ8C12OLH7A1B3JOH2G6CDEI5FP4L9NKM8A3C4K7EN6FM5P2J8LG9HDO1BI26IEJ3G8A5DO1CKBPNF4MHL97GOD7H14BILFN369MJK5A8CE2PP5BL1OCM9JH8A47I2E6DNG3FKN98FMD2KHPEBIGL1C73O5JA468129CAFIO3GK4DNL7BP6JE5HMDMGI62P7NKL1EOAJ54H9F3C8BL7J5B6HGEC3PMI2DNF18OA4K934FON591LDCHBJ8EKAMGP6I72EPKHAMJ48B9F756C3OI2GLD1N6GN3LE89FM2IHACKO1BJ4P75DFH784P62KO1DL3EAI5CNB9MGJK2MAPBLDCIJ45NGF897E61H3O1BED54NJ7AP96KOGHM23I8FCLCI9JOG531H7M8FB46DLP2KNAE
+
+
+
+
+****************************************
+* Fecha-Hora:2019-11-11 20:54:20.738075
+* Tipo:ABCDEFGHIJKLMNOPQRSTUVWXY
+* Nº Max. de Soluciones Buscadas:100
+*----------------------------------------
+* Altura Maxima Probable:     0
+* Altura Maxima Alcanzada:     0
+* Combinaciones Posibles: NO NECESARIO 
+* Combinaciones Probadas:       0
+* Soluciones Halladas:       1
+****************************************
+T   A  O     H      K SVM  QK       S  TO J  X    EIF MH  KX   D VP      L WC     J   L E RB Q  A TY  Y  F R  AJM   X      I  LIC        W J NE   M P   RX CJIEWGV    OP  LD     EYKN   GCF    J M  T QX  HJ   PL N  Y C VF USIW MN VF   S O H A  XW  G   D M      L    K Q  X      R  SIV  PX  T    D EBC  Q  UH   R SB VI LC   X     B X MWJDR P      A  L GF   WQH     D   ETJI  NUKS     YXWN Q O  D    U  J D  V  BMJ P      O F  YQ  CBG EQ  T  WY   NSM     Y WPR    KA B TM     EGNNJ  T  V U IFC GK  YD R    X     BV C FOWS I YNT  IU O  T  SL GK D Y FPH  WK      YF    PE R H    C     NX GH    QSPT BK I  E H F P N   U M     CB  AL
+TXJLAYPOGBQWNHRECIUDKFSVMVGQKREWLAMFSCITOHJYNXPUBDEIFSMHNCKXBOYDUVPGATQJWLRWCDHOVSJUIPLKEXRBFQMNAGTYBPYNUFDRQTAJMGVSXWKLCEHIOGLICBUFTYHDRWXJANESQOMKPVASRXQCJIEWGVBUMKOPTHLDYNFUWEYKNOAVGCFISPLJDMRHTBQXOTHJDMXPLRNKEYQCGVFBUSIWAMNPVFBQDSKOTHLAIYXWURGJECDVMICGBETLWHUJKNQSRXAYFOPJRLASIVUNPXGQTFYWKDOEBCMHQENUHAKFRYSBOVIMLCPGWXDJTYKBTXOMWJDREPNCHFUVAIQLSGFOGPWQHSXCYMDALBETJIVRNUKSMARIKYXWNEQLOGFDBCPTUVHJLDKEVTGBMJUPSRNXIHOWFCAYQHFCBGDEQOATXVWYJURNSMLPKIXYUWPRCHIFKAJBDTMQLVSOEGNNJOQTSLVPUMIFCHGKAEYDWRXBPQXGJLRKBVHCAFOWSMIEYNTDUIUVOEJTMCSLNGKBDAYXFPHQRWKBTMLWAYFQIDXPEURNHJGVOCSCAWDNXUGHOVYRQSPTLBKJIMFERHSFYPINDEJUTMWQVOGCBKXAL
+
+
+
+
+****************************************
+* Fecha-Hora:2019-11-12 18:10:05.574258
+* Tipo:ABCDEFGHIJKLMNOPQRSTUVWXY
+* Nº Max. de Soluciones Buscadas:100
+*----------------------------------------
+* Altura Maxima Probable:     0
+* Altura Maxima Alcanzada:     0
+* Combinaciones Posibles: NO NECESARIO 
+* Combinaciones Probadas:       0
+* Soluciones Halladas:       1
+****************************************
+ JGX  I PF   SBR  UT NW    OD WU      FE   XSL  J NH   C   S T  A   QF I X UW VMHLNJA P  REIKC Q    IPFC B   X Q V W J DU   S         H  RDLKM  YWAN JLM  CI  VGE   T D         V ROD S  W   UHQI JF E LQXDNW    J S A   V   GT O EH   YTL MJ XC R   S V  ECX AT R    NIV    U D   T   P NAQ  U        VFMKCD R U O HB W E CA L N Q IGFQWS        L  KDN T   Y   Y X    PFO    W HA GRE  P H   X CE UM WAD   SQ C NQ   M   A P U    XEOLTF M KN DWTL   O  S EGH P         U X   FOH  QM  VNX EBIP  AQNRS  L         H   RU J M X B Y   I SDGQ    B XHDKF  C PNEWVJR OM D I RW   U  J G   A   TX A  VYS   QI      BM CF    CJ QV  PTO   DU R  WAE 
+AJGXEOIQPFKDMSBRVLUTCNWYHRBODQWUYTVIHCFEAPNXSLMKJGNHYKLCDGRSJTUWAMBOQFEIPXVUWSVMHLNJAOPXYREIKCGQTBDFIPFCTBEKMXGQLVNWYJHDUORASBUISFEQXOHVGRDLKMTPYWANCJLMJPCIRWVGENFOTSDUAXBQYHKYVTRODASNCWBPKUHQIGJFXEMLQXDNWMPBKJHSYAIFLVECRGTUOKEHAGFYTLUMJQXCNRBOWSPVIDECXLATFRSYBKNIVQJGMUODHWPTOBHPLNAQWSUDGJXEYIRVFMKCDKRMUGOVHBYWTEXCAFLPNJQSIGFQWSJMPIERCALHVKDNOTUXBYJIVYNXKUCDPFOMQBSWTHALGREVYPOHKGFXLCEJUMTWADNIBSQRCSNQJVHMYIDAWPKUGRFBXEOLTFRMUKNCDWTLVBQOIXSYEGHJPAWLAGDSBEURXYITFOHPJQMKCVNXTEBIPJOAQNRSHGLCMVKDYUFWHNLFRUTJEMAXVBWYOCKIPSDGQSQUTBAXHDKFLGCYPNEWVJRIOMODKIYRWCBNUMEJPGFQSAHVLTXPAWEVYSLGOQIHRDJTXBMKCFNUMGCJXQVIFPTOKNSDUHRLYWAEB
+
+
+
+
+****************************************
+* Fecha-Hora: 2019-11-18 09:11:37.429149
+* Tipo: 25x25
+* Elementos Base: ABCDEFGHIJKLMNOPQRSTUVWXY
+* Nº Max. de Soluciones Buscadas: 100
+*----------------------------------------
+* Altura Maxima Probable:     0
+* Altura Maxima Alcanzada:     0
+* Combinaciones Posibles: NO NECESARIO 
+* Combinaciones Probadas:       0
+* Soluciones Halladas:       1
+****************************************
+ JGX  I PF   SBR  UT NW    OD WU      FE   XSL  J NH   C   S T  A   QF I X UW VMHLNJA P  REIKC Q    IPFC B   X Q V W J DU   S         H  RDLKM  YWAN JLM  CI  VGE   T D         V ROD S  W   UHQI JF E LQXDNW    J S A   V   GT O EH   YTL MJ XC R   S V  ECX AT R    NIV    U D   T   P NAQ  U        VFMKCD R U O HB W E CA L N Q IGFQWS        L  KDN T   Y   Y X    PFO    W HA GRE  P H   X CE UM WAD   SQ C NQ   M   A P U    XEOLTF M KN DWTL   O  S EGH P         U X   FOH  QM  VNX EBIP  AQNRS  L         H   RU J M X B Y   I SDGQ    B XHDKF  C PNEWVJR OM D I RW   U  J G   A   TX A  VYS   QI      BM CF    CJ QV  PTO   DU R  WAE 
+AJGXEOIQPFKDMSBRVLUTCNWYHRBODQWUYTVIHCFEAPNXSLMKJGNHYKLCDGRSJTUWAMBOQFEIPXVUWSVMHLNJAOPXYREIKCGQTBDFIPFCTBEKMXGQLVNWYJHDUORASBUISFEQXOHVGRDLKMTPYWANCJLMJPCIRWVGENFOTSDUAXBQYHKYVTRODASNCWBPKUHQIGJFXEMLQXDNWMPBKJHSYAIFLVECRGTUOKEHAGFYTLUMJQXCNRBOWSPVIDECXLATFRSYBKNIVQJGMUODHWPTOBHPLNAQWSUDGJXEYIRVFMKCDKRMUGOVHBYWTEXCAFLPNJQSIGFQWSJMPIERCALHVKDNOTUXBYJIVYNXKUCDPFOMQBSWTHALGREVYPOHKGFXLCEJUMTWADNIBSQRCSNQJVHMYIDAWPKUGRFBXEOLTFRMUKNCDWTLVBQOIXSYEGHJPAWLAGDSBEURXYITFOHPJQMKCVNXTEBIPJOAQNRSHGLCMVKDYUFWHNLFRUTJEMAXVBWYOCKIPSDGQSQUTBAXHDKFLGCYPNEWVJRIOMODKIYRWCBNUMEJPGFQSAHVLTXPAWEVYSLGOQIHRDJTXBMKCFNUMGCJXQVIFPTOKNSDUHRLYWAEB
+
+
+
